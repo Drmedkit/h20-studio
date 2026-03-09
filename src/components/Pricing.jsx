@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { CheckCircle, ArrowRight } from 'lucide-react';
 
 const GOALS = [
-    { id: 'pilot',   label: 'Eerst uitproberen',    sub: 'Gratis pilot, geen verplichtingen' },
-    { id: 'losse',   label: 'Losse opname(s)',       sub: 'Flexibel inboeken per sessie' },
-    { id: 'format',  label: 'Nieuw format lanceren', sub: 'Startpakketten incl. format-setup' },
-    { id: 'seizoen', label: 'Volledig seizoen',      sub: 'Compleet ontzorgd van A tot Z' },
+    { id: 'pilot',  label: 'Eerst uitproberen',    sub: 'Gratis pilot, geen verplichtingen' },
+    { id: 'losse',  label: 'Losse opname(s)',       sub: 'Flexibel inboeken per sessie' },
+    { id: 'format', label: 'Nieuw format lanceren', sub: 'Startpakketten incl. format-setup' },
 ];
 
 const PACKAGES = {
@@ -14,7 +13,12 @@ const PACKAGES = {
             id: 'gratis-pilot', label: 'Gratis Pilot',
             priceDisplay: 'Gratis', priceSub: 'eenmalig', price: 0,
             highlight: true, badge: null,
-            features: ['1 uur studio gebruik', 'High-end audio en video apparatuur', 'Basic setup support', 'Geen verplichtingen'],
+            features: [
+                '30 min proefopname',
+                'Licht- en geluidtest',
+                'Kennismaking & workflow uitleg',
+                'Geen verplichtingen',
+            ],
         },
     ],
     losse: [
@@ -22,19 +26,34 @@ const PACKAGES = {
             id: '1u', label: '1 Uur',
             priceDisplay: '€395', priceSub: '/ sessie', price: 395,
             highlight: false, badge: null,
-            features: ['Volledige studio toegang', 'High-end apparatuur', 'Basic technische support'],
+            features: [
+                'Podcaststudio & voorbereiding set',
+                'Technicus / regisseur inbegrepen',
+                '4-camera live schakeling',
+                'Professioneel licht & geluid',
+            ],
         },
         {
             id: '2u', label: '2 Uur',
             priceDisplay: '€595', priceSub: '/ sessie', price: 595,
             highlight: true, badge: 'MEEST FLEXIBEL',
-            features: ['Volledige studio toegang', 'High-end apparatuur', 'Eigen technicus stand-by', 'RAW bestanden direct mee'],
+            features: [
+                'Alles van 1 uur',
+                'Extra opnametijd',
+                'Mogelijkheid voor kleine decorwissel',
+                'Technicus / regisseur inbegrepen',
+            ],
         },
         {
-            id: 'halve-dag', label: 'Halve Dag',
+            id: 'halve-dag', label: 'Halve Dag (4u)',
             priceDisplay: '€795', priceSub: '/ sessie', price: 795,
             highlight: false, badge: null,
-            features: ['4 uur volledige studio toegang', 'Alle 4K video en Shure audio', 'Eigen technicus stand-by', 'RAW bestanden direct mee'],
+            features: [
+                'Bulk-opnames in één dagdeel',
+                'Technicus / regisseur inbegrepen',
+                'Koffie & thee verzorgd',
+                'Volledige facilitaire ondersteuning',
+            ],
         },
     ],
     format: [
@@ -42,51 +61,38 @@ const PACKAGES = {
             id: 'startpakket-1', label: 'Startpakket 1',
             priceDisplay: '€2.450', priceSub: 'eenmalig', price: 2450,
             highlight: false, badge: null,
-            features: ['Format-setup sessie', '2 opname sessies', 'Basic post-productie', 'Brand advies'],
+            features: [
+                '3 afleveringen',
+                'Format-setup',
+                'Basis audio / video design',
+                'Live schakelen',
+                'Oplevering direct na opname',
+            ],
         },
         {
             id: 'startpakket-2', label: 'Startpakket 2',
             priceDisplay: '€5.950', priceSub: 'eenmalig', price: 5950,
             highlight: true, badge: null,
-            features: ['Uitgebreide format-setup', '5 opname sessies', 'Volledige post-productie', 'Branding & design pakket', 'Distributie setup'],
-        },
-    ],
-    seizoen: [
-        {
-            id: 'mini', label: 'Miniseizoen', sub: '6 afleveringen',
-            priceOnly: 1995, priceOnlyDisplay: '€1.995',
-            priceFullService: 3595, priceFullServiceDisplay: '€3.595',
-            priceSub: '/ seizoen', highlight: false, badge: null,
-            featuresOnly:        ['6 opname sessies', 'Technische ondersteuning', 'RAW bestanden'],
-            featuresFullService: ['6 opname sessies', 'Dedicated technicus', 'Post-productie', 'Basis distributie'],
-        },
-        {
-            id: 'basis', label: 'Basis', sub: '12 afleveringen',
-            priceOnly: 3495, priceOnlyDisplay: '€3.495',
-            priceFullService: 6295, priceFullServiceDisplay: '€6.295',
-            priceSub: '/ seizoen', highlight: true, badge: 'BESTE PRIJS/AFL.',
-            featuresOnly:        ['12 opname sessies', 'Vaste technicus', 'RAW bestanden'],
-            featuresFullService: ['12 opname sessies', 'Dedicated technicus', 'Post-productie', 'Distributie begeleiding', 'Maandelijkse review'],
-        },
-        {
-            id: 'max', label: 'Max', sub: '20 afleveringen',
-            priceOnly: 5495, priceOnlyDisplay: '€5.495',
-            priceFullService: 9995, priceFullServiceDisplay: '€9.995',
-            priceSub: '/ seizoen', highlight: false, badge: null,
-            featuresOnly:        ['20 opname sessies', 'Prioriteit planning', 'RAW bestanden'],
-            featuresFullService: ['20 opname sessies', 'Dedicated productieteam', 'Full post-productie', 'Volledige distributie', 'Format management'],
+            features: [
+                '3 afleveringen',
+                'Uitgebreide format-ontwikkeling',
+                'Audio / video design',
+                'Redactie & live regie',
+                'Basis montage & productiebegeleiding',
+                '3 social snippets per aflevering',
+            ],
         },
     ],
 };
 
 export const ADDONS = [
-    { id: 'post',        label: 'Post-productie',     priceLabel: '€350',       price: 350  },
-    { id: 'snippets',    label: '5 Social Snippets',  priceLabel: '€250',       price: 250  },
-    { id: 'format-dev',  label: 'Format Ontwikkeling',priceLabel: '€800–1.600', price: null },
-    { id: 'design',      label: 'Video/Audio Design', priceLabel: '€400–800',   price: null },
-    { id: 'decor',       label: 'Custom Decor',       priceLabel: '€500–2.500', price: null },
-    { id: 'regie',       label: 'Redactie & Regie',   priceLabel: '€125/uur',   price: null },
-    { id: 'distributie', label: 'Distributie',        priceLabel: '€200/mnd',   price: null },
+    { id: 'post',       label: 'Post-productie',       priceLabel: '€350',         price: 350,  sub: 'Knippen/inkorten, fine-tuning audio, kleurcorrectie en titels' },
+    { id: 'snippets',   label: '5 Social Snippets',    priceLabel: '€250',         price: 250,  sub: 'Ondertiteling, hooks, headliner-stijl, diverse formaten' },
+    { id: 'format-dev', label: 'Format Ontwikkeling',  priceLabel: '€800–1.600',   price: null, sub: 'Scripting, flow en format-bewaking' },
+    { id: 'design',     label: 'Video / Audio Design', priceLabel: '€400–800',     price: null, sub: 'Leader, bumpers en custom motion graphics' },
+    { id: 'decor',      label: 'Custom Decor / Set',   priceLabel: '€500–2.500',   price: null, sub: 'Van simpele kleurwissel tot eigen meubels en aankleding' },
+    { id: 'regie',      label: 'Redactie & Regie',     priceLabel: '€125/uur',     price: null, sub: 'Inhoudelijke ondersteuning bij voorbereiding en tijdens opname' },
+    { id: 'host',       label: 'Host / Presentator',   priceLabel: 'Vanaf €400/afl.', price: null, sub: 'Professionele dagvoorzitter of host voor elke aflevering' },
 ];
 
 // ─── Step header ────────────────────────────────────────────────────────────
@@ -400,7 +406,8 @@ export default function Pricing({ setBookingConfig }) {
                                     >
                                         <div>
                                             <p className="font-heading font-bold text-sm text-offwhite uppercase tracking-wide">{addon.label}</p>
-                                            <p className="font-data text-xs text-offwhite/40 mt-1">{addon.priceLabel}</p>
+                                            <p className="font-data text-xs text-accent/80 mt-0.5">{addon.priceLabel}</p>
+                                            {addon.sub && <p className="font-data text-xs text-offwhite/35 mt-1 leading-snug">{addon.sub}</p>}
                                         </div>
                                         <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all ${
                                             isChecked ? 'bg-accent border-accent' : 'border-offwhite/30'

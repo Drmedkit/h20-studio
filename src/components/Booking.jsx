@@ -6,7 +6,7 @@ function getSlotConfig(bookingConfig) {
     if (!bookingConfig) return { slots: [], cols: 3, label: 'Tijdslot' };
     const { goal, pkg } = bookingConfig;
 
-    if (goal === 'seizoen' || goal === 'format') {
+    if (goal === 'format') {
         return {
             slots: ['10:00', '11:00', '14:00', '15:00'],
             cols: 4,
@@ -36,10 +36,6 @@ function getSlotConfig(bookingConfig) {
 }
 
 function getSectionCopy(goal) {
-    if (goal === 'seizoen') return {
-        title: 'Plan een Intakegesprek.',
-        sub: 'Kies een datum en tijdstip voor een kennismaking. We bespreken jouw seizoen en werken samen een productieplan op maat uit.',
-    };
     if (goal === 'format') return {
         title: 'Plan je Strategiesessie.',
         sub: 'Kies een moment voor een intake. We verkennen samen jouw format en stellen een aanpak voor.',

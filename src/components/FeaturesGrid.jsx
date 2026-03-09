@@ -50,7 +50,7 @@ function CursorScheduler() {
 
 function TelemetryTypewriter() {
     const [text, setText] = React.useState('');
-    const fullText = "SYSTEM:_INITIALIZING...\nAUDIO:_SYNCED_AT_48kHz/24bit.\nVIDEO:_4K_PRORES_ACTIVE.\nDIRECTOR_MODE:_ENGAGED.\nREADY_FOR_GUEST_ENTRY.";
+    const fullText = "SYSTEM:_INITIALIZING...\nAUDIO:_SYNCED_AT_48kHz/24bit.\nVIDEO:_HD_4-CAMERA_LIVE.\nDIRECTOR:_LIVE_IN_STUDIO.\nSET:_FLEX_DECOR_READY.\nGUEST:_ENTRY_CONFIRMED.";
 
     React.useEffect(() => {
         let currentLength = 0;
