@@ -96,7 +96,7 @@ function Hero() {
 }
 
 function App() {
-  const [bookingType, setBookingType] = useState(null);
+  const [bookingConfig, setBookingConfig] = useState(null);
 
   return (
     <main className="bg-background min-h-screen text-offwhite overflow-hidden selection:bg-accent selection:text-white">
@@ -105,8 +105,8 @@ function App() {
       <FeaturesGrid />
       <Features />
       <Protocol />
-      <Pricing setBookingType={setBookingType} />
-      {bookingType && <Booking bookingType={bookingType} setBookingType={setBookingType} />}
+      <Pricing setBookingConfig={setBookingConfig} />
+      {bookingConfig && <Booking bookingConfig={bookingConfig} setBookingConfig={setBookingConfig} />}
       <Footer />
     </main>
   );
