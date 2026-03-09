@@ -33,7 +33,7 @@ function Navbar() {
       <div className="hidden md:flex items-center gap-8 font-data text-sm uppercase tracking-wider text-offwhite/80">
         <a href="#faciliteiten" className="hover:text-white link-lift">Faciliteiten</a>
         <a href="#werkwijze" className="hover:text-white link-lift">Werkwijze</a>
-        <a href="#tarieven" className="hover:text-white link-lift">Tarieven</a>
+        <a href="#prijzen" className="hover:text-white link-lift">Tarieven</a>
       </div>
       <button onClick={() => document.getElementById('boeken')?.scrollIntoView({ behavior: 'smooth' })} className="magnetic-btn bg-accent text-white px-6 py-2.5 rounded-full font-heading font-bold text-sm tracking-wide">
         Boek de Studio
