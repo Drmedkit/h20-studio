@@ -87,7 +87,7 @@ export default function Features() {
     return (
         <div id="faciliteiten" className="relative z-10">
             <FeatureParallax
-                image="/mannen die praten.png"
+                image="/apparatuur.jpg"
                 topSub="Veel studio's bezuinigen op:"
                 topMain="betrouwbare beeld- en geluidskwaliteit."
                 bottomSub="Wij garanderen:"
