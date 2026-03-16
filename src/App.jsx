@@ -65,7 +65,7 @@ function Hero() {
     <section ref={container} className="relative h-[100dvh] w-full bg-background flex items-end pb-24 px-6 md:px-12">
       {/* Background Image with Heavy Gradient Overlay */}
       <div className="absolute inset-0 z-0">
-        <img src="/studio afbeelding.png" alt="H20 Podcast Studio" className="w-full h-full object-cover" />
+        <img src="/header.jpg" alt="H20 Podcast Studio" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/20 mix-blend-multiply"></div>
         <div className="absolute inset-0 bg-background/40 backdrop-blur-[2px]"></div>
       </div>

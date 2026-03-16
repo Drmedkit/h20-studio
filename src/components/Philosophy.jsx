@@ -45,7 +45,7 @@ export default function Philosophy() {
             <div className="absolute inset-0 z-0 w-full h-full">
                 <img
                     ref={imageRef}
-                    src="/productie.jpg"
+                    src="/complete ontzorging.jpg"
                     alt="H20 Studio Sfeer"
                     className="w-full h-[120%] -top-[10%] left-0 absolute object-cover opacity-50 sepia-[0.3] hue-rotate-[-30deg]"
                 />

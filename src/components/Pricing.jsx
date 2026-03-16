@@ -1,97 +1,91 @@
 import React, { useState } from 'react';
-import { CheckCircle, ArrowRight } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 
-const GOALS = [
-    { id: 'pilot',  label: 'Eerst uitproberen',    sub: 'Gratis pilot, geen verplichtingen' },
-    { id: 'losse',  label: 'Losse opname(s)',       sub: 'Flexibel inboeken per sessie' },
-    { id: 'format', label: 'Nieuw format lanceren', sub: 'Startpakketten incl. format-setup' },
+const PACKAGES = [
+    {
+        id: 'gratis-pilot', label: 'Gratis Pilot',
+        priceDisplay: 'Gratis', priceSub: 'eenmalig', price: 0,
+        highlight: false, badge: null,
+        category: 'Kennismaking',
+        features: [
+            '30 min proefopname',
+            'Licht- en geluidtest',
+            'Kennismaking & workflow uitleg',
+            'Geen verplichtingen',
+        ],
+    },
+    {
+        id: '1u', label: '1 Uur',
+        priceDisplay: '€395', priceSub: '/ sessie', price: 395,
+        highlight: false, badge: null,
+        category: 'Losse opname',
+        features: [
+            'Podcaststudio & voorbereiding set',
+            'Technicus / regisseur inbegrepen',
+            '4-camera live schakeling',
+            'Professioneel licht & geluid',
+        ],
+    },
+    {
+        id: '2u', label: '2 Uur',
+        priceDisplay: '€595', priceSub: '/ sessie', price: 595,
+        highlight: true, badge: 'MEEST FLEXIBEL',
+        category: 'Losse opname',
+        features: [
+            'Alles van 1 uur',
+            'Extra opnametijd',
+            'Mogelijkheid voor kleine decorwissel',
+            'Technicus / regisseur inbegrepen',
+        ],
+    },
+    {
+        id: 'halve-dag', label: 'Halve Dag (4u)',
+        priceDisplay: '€795', priceSub: '/ sessie', price: 795,
+        highlight: false, badge: null,
+        category: 'Losse opname',
+        features: [
+            'Bulk-opnames in één dagdeel',
+            'Technicus / regisseur inbegrepen',
+            'Koffie & thee verzorgd',
+            'Volledige facilitaire ondersteuning',
+        ],
+    },
+    {
+        id: 'startpakket-1', label: 'Startpakket 1',
+        priceDisplay: '€2.450', priceSub: 'eenmalig', price: 2450,
+        highlight: false, badge: null,
+        category: 'Nieuw format',
+        features: [
+            '3 afleveringen',
+            'Format-setup',
+            'Basis audio / video design',
+            'Live schakelen',
+            'Oplevering direct na opname',
+        ],
+    },
+    {
+        id: 'startpakket-2', label: 'Startpakket 2',
+        priceDisplay: '€5.950', priceSub: 'eenmalig', price: 5950,
+        highlight: false, badge: null,
+        category: 'Nieuw format',
+        features: [
+            '3 afleveringen',
+            'Uitgebreide format-ontwikkeling',
+            'Audio / video design',
+            'Redactie & live regie',
+            'Basis montage & productiebegeleiding',
+            '3 social snippets per aflevering',
+        ],
+    },
 ];
 
-const PACKAGES = {
-    pilot: [
-        {
-            id: 'gratis-pilot', label: 'Gratis Pilot',
-            priceDisplay: 'Gratis', priceSub: 'eenmalig', price: 0,
-            highlight: true, badge: null,
-            features: [
-                '30 min proefopname',
-                'Licht- en geluidtest',
-                'Kennismaking & workflow uitleg',
-                'Geen verplichtingen',
-            ],
-        },
-    ],
-    losse: [
-        {
-            id: '1u', label: '1 Uur',
-            priceDisplay: '€395', priceSub: '/ sessie', price: 395,
-            highlight: false, badge: null,
-            features: [
-                'Podcaststudio & voorbereiding set',
-                'Technicus / regisseur inbegrepen',
-                '4-camera live schakeling',
-                'Professioneel licht & geluid',
-            ],
-        },
-        {
-            id: '2u', label: '2 Uur',
-            priceDisplay: '€595', priceSub: '/ sessie', price: 595,
-            highlight: true, badge: 'MEEST FLEXIBEL',
-            features: [
-                'Alles van 1 uur',
-                'Extra opnametijd',
-                'Mogelijkheid voor kleine decorwissel',
-                'Technicus / regisseur inbegrepen',
-            ],
-        },
-        {
-            id: 'halve-dag', label: 'Halve Dag (4u)',
-            priceDisplay: '€795', priceSub: '/ sessie', price: 795,
-            highlight: false, badge: null,
-            features: [
-                'Bulk-opnames in één dagdeel',
-                'Technicus / regisseur inbegrepen',
-                'Koffie & thee verzorgd',
-                'Volledige facilitaire ondersteuning',
-            ],
-        },
-    ],
-    format: [
-        {
-            id: 'startpakket-1', label: 'Startpakket 1',
-            priceDisplay: '€2.450', priceSub: 'eenmalig', price: 2450,
-            highlight: false, badge: null,
-            features: [
-                '3 afleveringen',
-                'Format-setup',
-                'Basis audio / video design',
-                'Live schakelen',
-                'Oplevering direct na opname',
-            ],
-        },
-        {
-            id: 'startpakket-2', label: 'Startpakket 2',
-            priceDisplay: '€5.950', priceSub: 'eenmalig', price: 5950,
-            highlight: true, badge: null,
-            features: [
-                '3 afleveringen',
-                'Uitgebreide format-ontwikkeling',
-                'Audio / video design',
-                'Redactie & live regie',
-                'Basis montage & productiebegeleiding',
-                '3 social snippets per aflevering',
-            ],
-        },
-    ],
-};
-
 export const ADDONS = [
-    { id: 'post',       label: 'Post-productie',       priceLabel: '€350',         price: 350,  sub: 'Knippen/inkorten, fine-tuning audio, kleurcorrectie en titels' },
-    { id: 'snippets',   label: '5 Social Snippets',    priceLabel: '€250',         price: 250,  sub: 'Ondertiteling, hooks, headliner-stijl, diverse formaten' },
-    { id: 'format-dev', label: 'Format Ontwikkeling',  priceLabel: '€800–1.600',   price: null, sub: 'Scripting, flow en format-bewaking' },
-    { id: 'design',     label: 'Video / Audio Design', priceLabel: '€400–800',     price: null, sub: 'Leader, bumpers en custom motion graphics' },
-    { id: 'decor',      label: 'Custom Decor / Set',   priceLabel: '€500–2.500',   price: null, sub: 'Van simpele kleurwissel tot eigen meubels en aankleding' },
-    { id: 'regie',      label: 'Redactie & Regie',     priceLabel: '€125/uur',     price: null, sub: 'Inhoudelijke ondersteuning bij voorbereiding en tijdens opname' },
+    { id: 'post',       label: 'Post-productie',       priceLabel: '€350',            price: 350,  sub: 'Knippen/inkorten, fine-tuning audio, kleurcorrectie en titels' },
+    { id: 'snippets',   label: '5 Social Snippets',    priceLabel: '€250',            price: 250,  sub: 'Ondertiteling, hooks, headliner-stijl, diverse formaten' },
+    { id: 'format-dev', label: 'Format Ontwikkeling',  priceLabel: '€800–1.600',      price: null, sub: 'Scripting, flow en format-bewaking' },
+    { id: 'design',     label: 'Video / Audio Design', priceLabel: '€400–800',        price: null, sub: 'Leader, bumpers en custom motion graphics' },
+    { id: 'decor',      label: 'Custom Decor / Set',   priceLabel: '€500–2.500',      price: null, sub: 'Van simpele kleurwissel tot eigen meubels en aankleding' },
+    { id: 'regie',      label: 'Redactie & Regie',     priceLabel: '€125/uur',        price: null, sub: 'Inhoudelijke ondersteuning bij voorbereiding en tijdens opname' },
     { id: 'host',       label: 'Host / Presentator',   priceLabel: 'Vanaf €400/afl.', price: null, sub: 'Professionele dagvoorzitter of host voor elke aflevering' },
 ];
 
@@ -125,107 +119,19 @@ function StepRow({ num, label, summary, isActive, isCompleted, onEdit, children 
     );
 }
 
-// ─── Package cards ───────────────────────────────────────────────────────────
-function PackageCards({ goal, packages, pkg, fullService, onSelect }) {
-    const colClass =
-        packages.length === 1 ? 'max-w-sm mx-auto' :
-        packages.length === 2 ? 'md:grid-cols-2 max-w-3xl mx-auto' :
-        'md:grid-cols-3';
-
-    return (
-        <div className={`grid grid-cols-1 gap-8 ${colClass}`}>
-            {packages.map((p) => {
-                const priceDisplay = goal === 'seizoen'
-                    ? (fullService ? p.priceFullServiceDisplay : p.priceOnlyDisplay)
-                    : p.priceDisplay;
-                const features = goal === 'seizoen'
-                    ? (fullService ? p.featuresFullService : p.featuresOnly)
-                    : p.features;
-                const isSelected = pkg === p.id;
-
-                return (
-                    <div
-                        key={p.id}
-                        className={`bg-surface rounded-3xl p-8 border-2 flex flex-col justify-between transition-all duration-300 overflow-hidden relative ${
-                            p.highlight
-                                ? 'border-accent drop-shadow-[0_0_30px_rgba(230,59,46,0.15)] md:-translate-y-4'
-                                : isSelected
-                                ? 'border-accent/50'
-                                : 'border-offwhite/10'
-                        }`}
-                    >
-                        {p.highlight && (
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 blur-3xl -mr-20 -mt-20 pointer-events-none" />
-                        )}
-                        <div>
-                            {p.badge && (
-                                <div className="inline-block bg-accent text-white font-heading font-bold text-[10px] px-3 py-1 rounded-full uppercase tracking-widest mb-4">
-                                    {p.badge}
-                                </div>
-                            )}
-                            <h3 className={`font-heading font-bold text-lg mb-1 uppercase tracking-widest ${p.highlight ? 'text-accent' : 'text-offwhite/70'}`}>
-                                {p.label}
-                            </h3>
-                            {p.sub && (
-                                <p className="font-data text-xs text-offwhite/40 mb-4 uppercase tracking-wider">{p.sub}</p>
-                            )}
-                            <div className="flex items-baseline gap-2 mb-6">
-                                <span className={`font-drama italic text-5xl ${p.highlight ? 'text-white' : 'text-offwhite'}`}>
-                                    {priceDisplay}
-                                </span>
-                                {p.priceSub && (
-                                    <span className="font-data text-sm text-offwhite/50">{p.priceSub}</span>
-                                )}
-                            </div>
-                            <ul className="flex flex-col gap-4 font-data text-sm text-offwhite/60 mb-8">
-                                {features.map((f, fi) => (
-                                    <li key={fi} className="flex items-start gap-3">
-                                        <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                                        {f}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <button
-                            onClick={() => onSelect(p.id)}
-                            className={`magnetic-btn w-full py-4 text-sm font-heading font-bold rounded-xl uppercase tracking-wide ${
-                                p.highlight
-                                    ? 'bg-accent text-white hover:bg-red-600'
-                                    : 'border border-offwhite/20 text-offwhite hover:bg-offwhite/5'
-                            }`}
-                        >
-                            {p.price === 0 ? 'Plan Gratis Pilot' : 'Selecteer Pakket'}
-                        </button>
-                    </div>
-                );
-            })}
-        </div>
-    );
-}
-
 // ─── Main component ──────────────────────────────────────────────────────────
 export default function Pricing({ setBookingConfig }) {
     const [activeStep, setActiveStep] = useState(1);
-    const [goal, setGoal] = useState(null);
     const [pkg, setPkg] = useState(null);
-    const [fullService, setFullService] = useState(false);
     const [selectedAddons, setSelectedAddons] = useState([]);
 
-    const goalData = goal ? GOALS.find(g => g.id === goal) : null;
-    const pkgData  = goal && pkg ? PACKAGES[goal]?.find(p => p.id === pkg) : null;
-
-    const handleGoalSelect = (goalId) => {
-        const changed = goalId !== goal;
-        setGoal(goalId);
-        if (changed) { setPkg(null); setSelectedAddons([]); }
-        setActiveStep(2);
-    };
+    const pkgData = pkg ? PACKAGES.find(p => p.id === pkg) : null;
 
     const handlePkgSelect = (pkgId) => {
         const changed = pkgId !== pkg;
         setPkg(pkgId);
         if (changed) setSelectedAddons([]);
-        setActiveStep(3);
+        setActiveStep(2);
     };
 
     const toggleAddon = (addonId) => {
@@ -237,12 +143,7 @@ export default function Pricing({ setBookingConfig }) {
     // ── Price calc ──
     const getPriceInfo = () => {
         if (!pkgData) return null;
-        let base;
-        if (goal === 'seizoen') {
-            base = fullService ? pkgData.priceFullService : pkgData.priceOnly;
-        } else {
-            base = pkgData.price;
-        }
+        const base = pkgData.price;
         let addonTotal = 0;
         let hasRange = false;
         for (const id of selectedAddons) {
@@ -250,7 +151,6 @@ export default function Pricing({ setBookingConfig }) {
             if (a?.price === null) hasRange = true;
             else if (a?.price) addonTotal += a.price;
         }
-        if (base === null || base === undefined) return { display: 'Op aanvraag', isRange: false };
         if (base === 0 && addonTotal === 0 && !hasRange) return { display: 'Gratis', isRange: false };
         if (hasRange) return { display: `Vanaf \u20AC${(base + addonTotal).toLocaleString('nl-NL')}`, isRange: true };
         return { display: `\u20AC${(base + addonTotal).toLocaleString('nl-NL')}`, isRange: false };
@@ -258,29 +158,18 @@ export default function Pricing({ setBookingConfig }) {
 
     const priceInfo = getPriceInfo();
 
-    // ── Step summaries ──
-    const step1Summary = goalData?.label ?? null;
-    const step2Summary = pkgData
-        ? goal === 'seizoen'
-            ? `${pkgData.label} — ${fullService ? 'Full-service' : 'Alleen opname'}`
-            : pkgData.label
-        : null;
-    const step3Summary = selectedAddons.length > 0
+    const step1Summary = pkgData?.label ?? null;
+    const step2Summary = selectedAddons.length > 0
         ? `${selectedAddons.length} add-on${selectedAddons.length > 1 ? 's' : ''}`
         : 'Geen add-ons';
 
     const handleCTA = () => {
         if (!setBookingConfig) return;
         setBookingConfig({
-            goal,
-            goalLabel: goalData?.label,
             pkg,
             pkgLabel: pkgData?.label,
-            pkgPriceDisplay: goal === 'seizoen'
-                ? (fullService ? pkgData?.priceFullServiceDisplay : pkgData?.priceOnlyDisplay)
-                : pkgData?.priceDisplay,
-            pkgSub: pkgData?.sub ?? null,
-            fullService,
+            pkgPriceDisplay: pkgData?.priceDisplay,
+            pkgSub: pkgData?.priceSub ?? null,
             addons: selectedAddons.map(id => {
                 const a = ADDONS.find(x => x.id === id);
                 return { id, label: a?.label, priceLabel: a?.priceLabel };
@@ -294,7 +183,7 @@ export default function Pricing({ setBookingConfig }) {
 
     return (
         <section id="prijzen" className="py-32 px-6 md:px-12 bg-background relative z-10 w-full flex items-center justify-center">
-            <div className="max-w-4xl mx-auto w-full">
+            <div className="max-w-6xl mx-auto w-full">
 
                 {/* Header */}
                 <div className="mb-16 text-center">
@@ -309,84 +198,83 @@ export default function Pricing({ setBookingConfig }) {
                 {/* Accordion */}
                 <div className="border-t border-offwhite/10">
 
-                    {/* Step 1 — Doel */}
+                    {/* Step 1 — Pakket */}
                     <StepRow
-                        num={1} label="Doel"
+                        num={1} label="Pakket"
                         summary={step1Summary}
                         isActive={activeStep === 1}
                         isCompleted={activeStep > 1}
                         onEdit={() => setActiveStep(1)}
                     >
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                            {GOALS.map((g) => (
-                                <button
-                                    key={g.id}
-                                    onClick={() => handleGoalSelect(g.id)}
-                                    className={`magnetic-btn rounded-3xl p-7 border text-left transition-all duration-300 group ${
-                                        goal === g.id
-                                            ? 'bg-accent/5 border-accent/50'
-                                            : 'bg-surface border-offwhite/10 hover:border-accent/30'
-                                    }`}
-                                >
-                                    <h3 className={`font-heading font-bold text-lg mb-2 tracking-tight transition-colors ${
-                                        goal === g.id ? 'text-accent' : 'text-offwhite group-hover:text-accent'
-                                    }`}>
-                                        {g.label}
-                                    </h3>
-                                    <p className="font-data text-sm text-offwhite/50">{g.sub}</p>
-                                    <div className="mt-5 flex items-center gap-2 font-data text-xs text-accent uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                        <span>Selecteer</span>
-                                        <ArrowRight className="w-3 h-3" />
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {PACKAGES.map((p) => {
+                                const isSelected = pkg === p.id;
+                                return (
+                                    <div
+                                        key={p.id}
+                                        onClick={() => handlePkgSelect(p.id)}
+                                        className={`bg-surface rounded-3xl p-7 border-2 flex flex-col justify-between transition-all duration-300 overflow-hidden relative cursor-pointer group ${
+                                            p.highlight
+                                                ? 'border-accent drop-shadow-[0_0_30px_rgba(230,59,46,0.15)] md:-translate-y-4'
+                                                : isSelected
+                                                ? 'border-offwhite/80 bg-offwhite/5 md:-translate-y-1'
+                                                : 'border-offwhite/10 hover:border-offwhite/30'
+                                        }`}
+                                    >
+                                        {p.highlight && (
+                                            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 blur-3xl -mr-20 -mt-20 pointer-events-none" />
+                                        )}
+                                        <div>
+                                            <div className="flex items-start justify-between mb-1">
+                                                <span className="font-data text-[10px] text-offwhite/30 uppercase tracking-widest">{p.category}</span>
+                                                {p.badge && (
+                                                    <div className="inline-block bg-accent text-white font-heading font-bold text-[10px] px-3 py-1 rounded-full uppercase tracking-widest">
+                                                        {p.badge}
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <h3 className={`font-heading font-bold text-lg mb-4 uppercase tracking-widest transition-colors ${
+                                                p.highlight ? 'text-accent' : isSelected ? 'text-offwhite' : 'text-offwhite/70 group-hover:text-offwhite'
+                                            }`}>
+                                                {p.label}
+                                            </h3>
+                                            <div className="flex items-baseline gap-2 mb-6">
+                                                <span className="font-drama italic text-4xl text-offwhite">{p.priceDisplay}</span>
+                                                {p.priceSub && (
+                                                    <span className="font-data text-sm text-offwhite/50">{p.priceSub}</span>
+                                                )}
+                                            </div>
+                                            <ul className="flex flex-col gap-3 font-data text-sm text-offwhite/60">
+                                                {p.features.map((f, fi) => (
+                                                    <li key={fi} className="flex items-start gap-3">
+                                                        <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                                                        {f}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className={`mt-6 w-full py-3 text-sm font-heading font-bold rounded-xl uppercase tracking-wide text-center transition-all duration-200 ${
+                                            isSelected && !p.highlight
+                                                ? 'bg-offwhite text-background'
+                                                : isSelected && p.highlight
+                                                ? 'bg-accent text-white'
+                                                : p.highlight
+                                                ? 'bg-accent text-white group-hover:bg-red-600'
+                                                : 'border border-offwhite/20 text-offwhite/60 group-hover:border-offwhite/50 group-hover:text-offwhite'
+                                        }`}>
+                                            {isSelected ? 'Geselecteerd ✓' : p.price === 0 ? 'Plan Gratis Pilot' : 'Selecteer Pakket'}
+                                        </div>
                                     </div>
-                                </button>
-                            ))}
+                                );
+                            })}
                         </div>
                     </StepRow>
 
-                    {/* Step 2 — Pakket */}
+                    {/* Step 2 — Add-ons */}
                     <StepRow
-                        num={2} label="Pakket"
-                        summary={step2Summary}
+                        num={2} label="Add-ons"
+                        summary={activeStep > 2 ? step2Summary : null}
                         isActive={activeStep === 2}
-                        isCompleted={activeStep > 2}
-                        onEdit={() => setActiveStep(2)}
-                    >
-                        {goal && (
-                            <div>
-                                {goal === 'seizoen' && (
-                                    <div className="flex items-center justify-center mb-10">
-                                        <div className="flex items-center gap-1 bg-surface rounded-full p-1 border border-offwhite/10 font-data text-xs uppercase tracking-widest">
-                                            <button
-                                                onClick={() => setFullService(false)}
-                                                className={`px-5 py-2.5 rounded-full transition-all duration-200 ${!fullService ? 'bg-accent text-white' : 'text-offwhite/50 hover:text-offwhite'}`}
-                                            >
-                                                Alleen opname
-                                            </button>
-                                            <button
-                                                onClick={() => setFullService(true)}
-                                                className={`px-5 py-2.5 rounded-full transition-all duration-200 ${fullService ? 'bg-accent text-white' : 'text-offwhite/50 hover:text-offwhite'}`}
-                                            >
-                                                Full-service
-                                            </button>
-                                        </div>
-                                    </div>
-                                )}
-                                <PackageCards
-                                    goal={goal}
-                                    packages={PACKAGES[goal]}
-                                    pkg={pkg}
-                                    fullService={fullService}
-                                    onSelect={handlePkgSelect}
-                                />
-                            </div>
-                        )}
-                    </StepRow>
-
-                    {/* Step 3 — Add-ons */}
-                    <StepRow
-                        num={3} label="Add-ons"
-                        summary={activeStep > 3 ? step3Summary : null}
-                        isActive={activeStep === 3}
                         isCompleted={false}
                         onEdit={null}
                     >
