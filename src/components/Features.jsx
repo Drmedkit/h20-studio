@@ -98,7 +98,6 @@ export default function Features() {
                 bottomAlign="right"
                 imagePosition="object-[75%_50%]"
             />
-            <Philosophy />
             <FeatureParallax
                 image="/dame greenscreen.png"
                 topSub="Elders ben je gebonden aan:"
@@ -111,6 +110,7 @@ export default function Features() {
                 bottomAlign="right"
                 imagePosition="object-[10%_50%]"
             />
+            <Philosophy />
         </div>
     );
 }
