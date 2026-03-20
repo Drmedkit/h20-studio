@@ -64,7 +64,7 @@ export default function Protocol() {
         ScrollTrigger.create({
             trigger: container.current,
             start: 'top top',
-            end: `+=${cards.length * 100}%`,
+            end: `+=${(cards.length - 1) * 100}%`,
             pin: true,
             scrub: 1,
         });
