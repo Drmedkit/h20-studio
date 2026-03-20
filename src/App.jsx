@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Menu, X } from 'lucide-react';
 
 import FeaturesGrid from './components/FeaturesGrid';
 import Features from './components/Features';
@@ -15,6 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 function Navbar() {
   const navRef = useRef(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useGSAP(() => {
     ScrollTrigger.create({
@@ -24,20 +25,42 @@ function Navbar() {
     });
   }, { scope: navRef });
 
+  function scrollTo(id) {
+    setMenuOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  }
+
   return (
-    <nav ref={navRef} className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-6xl px-6 py-4 flex items-center justify-between rounded-full border border-transparent transition-all duration-500 bg-surface/60 backdrop-blur-xl border-offwhite/10">
-      <div className="flex items-center">
-        <img src="/h20-studio-logo.png" alt="H20 Studio Logo" className="h-10 object-contain" />
-      </div>
-      <div className="hidden md:flex items-center gap-8 font-data text-sm uppercase tracking-wider text-offwhite/80">
-        <a href="#faciliteiten" className="hover:text-white link-lift">Faciliteiten</a>
-        <a href="#werkwijze" className="hover:text-white link-lift">Werkwijze</a>
-        <a href="#prijzen" className="hover:text-white link-lift">Tarieven</a>
-      </div>
-      <button onClick={() => document.getElementById('prijzen')?.scrollIntoView({ behavior: 'smooth' })} className="magnetic-btn bg-accent text-white px-6 py-2.5 rounded-full font-heading font-bold text-sm tracking-wide">
-        Boek de Studio
-      </button>
-    </nav>
+    <>
+      <nav ref={navRef} className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-6xl px-6 py-4 flex items-center justify-between rounded-full border border-transparent transition-all duration-500 bg-surface/60 backdrop-blur-xl border-offwhite/10">
+        <div className="flex items-center">
+          <img src="/h20-studio-logo.png" alt="H20 Studio Logo" className="h-10 object-contain" />
+        </div>
+        <div className="hidden md:flex items-center gap-8 font-data text-sm uppercase tracking-wider text-offwhite/80">
+          <a href="#faciliteiten" className="hover:text-white link-lift">Faciliteiten</a>
+          <a href="#werkwijze" className="hover:text-white link-lift">Werkwijze</a>
+          <a href="#prijzen" className="hover:text-white link-lift">Tarieven</a>
+        </div>
+        <button onClick={() => document.getElementById('prijzen')?.scrollIntoView({ behavior: 'smooth' })} className="magnetic-btn hidden md:block bg-accent text-white px-6 py-2.5 rounded-full font-heading font-bold text-sm tracking-wide">
+          Boek de Studio
+        </button>
+        <button onClick={() => setMenuOpen(o => !o)} className="md:hidden text-offwhite p-1">
+          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </nav>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center gap-10">
+          <a onClick={() => scrollTo('faciliteiten')} className="font-heading font-bold text-4xl text-offwhite tracking-tight cursor-pointer hover:text-accent transition-colors">Faciliteiten</a>
+          <a onClick={() => scrollTo('werkwijze')} className="font-heading font-bold text-4xl text-offwhite tracking-tight cursor-pointer hover:text-accent transition-colors">Werkwijze</a>
+          <a onClick={() => scrollTo('prijzen')} className="font-heading font-bold text-4xl text-offwhite tracking-tight cursor-pointer hover:text-accent transition-colors">Tarieven</a>
+          <button onClick={() => scrollTo('prijzen')} className="mt-4 bg-accent text-white px-10 py-4 rounded-full font-heading font-bold text-lg tracking-wide">
+            Boek de Studio
+          </button>
+        </div>
+      )}
+    </>
   );
 }
 

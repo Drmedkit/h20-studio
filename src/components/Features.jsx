@@ -110,7 +110,7 @@ export default function Features() {
                 hueRotate="hue-rotate-[10deg]"
                 topAlign="left"
                 bottomAlign="right"
-                imagePosition="object-[10%_50%]"
+                imagePosition="object-[35%_50%]"
             />
             <Philosophy />
         </div>
