@@ -131,12 +131,17 @@ export default function Pricing({ setBookingConfig }) {
         const changed = pkgId !== pkg;
         setPkg(pkgId);
         if (changed) setSelectedAddons([]);
-        setTimeout(() => {
-            setActiveStep(2);
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) {
             setTimeout(() => {
-                document.getElementById('addons-step')?.scrollIntoView({ behavior: 'smooth' });
-            }, 400);
-        }, 550);
+                setActiveStep(2);
+                setTimeout(() => {
+                    document.getElementById('addons-step')?.scrollIntoView({ behavior: 'smooth' });
+                }, 400);
+            }, 550);
+        } else {
+            setActiveStep(2);
+        }
     };
 
     const toggleAddon = (addonId) => {
