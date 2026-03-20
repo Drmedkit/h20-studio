@@ -92,7 +92,7 @@ export const ADDONS = [
 // ─── Step header ────────────────────────────────────────────────────────────
 function StepRow({ num, label, summary, isActive, isCompleted, onEdit, children }) {
     return (
-        <div className={`border-b transition-colors duration-300 ${isActive ? 'border-offwhite/10' : 'border-offwhite/5'}`}>
+        <div className={`border-b transition-colors duration-300 ${isActive ? 'border-offwhite/10' : 'border-offwhite/5'}`} id={num === 2 ? 'addons-step' : undefined}>
             <div className="flex items-center justify-between py-6">
                 <div className="flex items-center gap-5 min-w-0">
                     <span className={`font-data text-xs tracking-widest shrink-0 transition-colors ${isActive ? 'text-accent' : isCompleted ? 'text-offwhite/40' : 'text-offwhite/15'}`}>
@@ -131,7 +131,12 @@ export default function Pricing({ setBookingConfig }) {
         const changed = pkgId !== pkg;
         setPkg(pkgId);
         if (changed) setSelectedAddons([]);
-        setActiveStep(2);
+        setTimeout(() => {
+            setActiveStep(2);
+            setTimeout(() => {
+                document.getElementById('addons-step')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 150);
+        }, 350);
     };
 
     const toggleAddon = (addonId) => {
@@ -178,7 +183,7 @@ export default function Pricing({ setBookingConfig }) {
         });
         setTimeout(() => {
             document.getElementById('boeken')?.scrollIntoView({ behavior: 'smooth' });
-        }, 50);
+        }, 400);
     };
 
     return (
