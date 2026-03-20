@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -10,6 +11,15 @@ import Protocol from './components/Protocol';
 import Pricing from './components/Pricing';
 import Booking from './components/Booking';
 import Footer from './components/Footer';
+
+import Purmerend from './pages/locations/Purmerend';
+import Hoorn from './pages/locations/Hoorn';
+import Zaandam from './pages/locations/Zaandam';
+import Alkmaar from './pages/locations/Alkmaar';
+import AmsterdamNoord from './pages/locations/AmsterdamNoord';
+import NoordHolland from './pages/locations/NoordHolland';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -174,7 +184,7 @@ function Hero() {
   );
 }
 
-function App() {
+function Home() {
   const [bookingConfig, setBookingConfig] = useState(null);
 
   return (
@@ -191,4 +201,18 @@ function App() {
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/podcast-studio-purmerend"       element={<Purmerend />} />
+      <Route path="/podcast-studio-hoorn"           element={<Hoorn />} />
+      <Route path="/podcast-studio-zaandam"         element={<Zaandam />} />
+      <Route path="/podcast-studio-alkmaar"         element={<Alkmaar />} />
+      <Route path="/podcast-studio-amsterdam-noord" element={<AmsterdamNoord />} />
+      <Route path="/podcast-studio-noord-holland"   element={<NoordHolland />} />
+      <Route path="/blog"                           element={<Blog />} />
+      <Route path="/blog/:slug"                     element={<BlogPost />} />
+    </Routes>
+  );
+}

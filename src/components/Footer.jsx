@@ -1,4 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const locations = [
+    { label: 'Purmerend',       path: '/podcast-studio-purmerend'       },
+    { label: 'Hoorn',           path: '/podcast-studio-hoorn'           },
+    { label: 'Zaandam',         path: '/podcast-studio-zaandam'         },
+    { label: 'Alkmaar',         path: '/podcast-studio-alkmaar'         },
+    { label: 'Amsterdam Noord', path: '/podcast-studio-amsterdam-noord' },
+    { label: 'Noord-Holland',   path: '/podcast-studio-noord-holland'   },
+];
 
 export default function Footer() {
     const [time, setTime] = useState('');
@@ -12,10 +22,10 @@ export default function Footer() {
 
     return (
         <footer className="w-full bg-[#0a0a0a] rounded-t-[4rem] text-offwhite pt-24 pb-8 px-6 md:px-12 mt-[-4rem] relative z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-offwhite/5 flex flex-col items-center">
-            <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-4 gap-12 mb-20 mx-auto">
+            <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20 mx-auto">
 
                 {/* Brand */}
-                <div className="md:col-span-2 flex flex-col gap-6">
+                <div className="md:col-span-2 lg:col-span-1 flex flex-col gap-6">
                     <div className="flex items-center">
                         <img src="/h20-studio-logo.png" alt="H20 Studio Logo" className="h-12 object-contain" />
                     </div>
@@ -24,7 +34,7 @@ export default function Footer() {
                     </p>
                 </div>
 
-                {/* Links 1 */}
+                {/* Navigatie */}
                 <div className="flex flex-col gap-4">
                     <h4 className="font-heading font-bold text-lg mb-2">Navigatie</h4>
                     <a href="#faciliteiten" className="font-data text-sm text-offwhite/50 hover:text-accent transition-colors link-lift inline-block w-fit">Faciliteiten</a>
@@ -33,9 +43,23 @@ export default function Footer() {
                     <a href="#" className="font-data text-sm text-offwhite/50 hover:text-accent transition-colors link-lift inline-block w-fit">Contact</a>
                 </div>
 
-                {/* Links 2 */}
+                {/* Locaties */}
                 <div className="flex flex-col gap-4">
-                    <h4 className="font-heading font-bold text-lg mb-2">Locatie</h4>
+                    <h4 className="font-heading font-bold text-lg mb-2">Locaties</h4>
+                    {locations.map(({ label, path }) => (
+                        <Link
+                            key={path}
+                            to={path}
+                            className="font-data text-sm text-offwhite/50 hover:text-accent transition-colors link-lift inline-block w-fit"
+                        >
+                            {label}
+                        </Link>
+                    ))}
+                </div>
+
+                {/* Contact */}
+                <div className="flex flex-col gap-4">
+                    <h4 className="font-heading font-bold text-lg mb-2">Contact</h4>
                     <a href="https://h20.gg" target="_blank" rel="noopener noreferrer" className="font-data text-sm text-offwhite/50 hover:text-white transition-colors leading-relaxed inline-block">
                         Spinnekop 2<br />
                         1444 GN Purmerend<br />
