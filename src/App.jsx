@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -45,19 +45,16 @@ function MobileMenu({ onClose }) {
     { label: 'Faciliteiten', id: 'faciliteiten' },
     { label: 'Werkwijze',    id: 'werkwijze'    },
     { label: 'Tarieven',     id: 'prijzen'      },
+    { label: 'Blog',         id: null, href: '/blog' },
   ];
 
   return (
     <div ref={overlayRef} className="fixed inset-0 z-40 bg-background/97 backdrop-blur-xl flex flex-col items-center justify-center gap-2 px-8">
       <div ref={itemsRef} className="flex flex-col items-center gap-8 w-full">
-        {links.map(({ label, id }) => (
-          <button
-            key={id}
-            onClick={() => scrollTo(id)}
-            className="mobile-menu-item w-full text-center font-drama italic text-5xl text-offwhite hover:text-accent transition-colors leading-tight"
-          >
-            {label}
-          </button>
+        {links.map(({ label, id, href }) => (
+          href
+            ? <Link key={label} to={href} onClick={onClose} className="mobile-menu-item w-full text-center font-drama italic text-5xl text-offwhite hover:text-accent transition-colors leading-tight">{label}</Link>
+            : <button key={id} onClick={() => scrollTo(id)} className="mobile-menu-item w-full text-center font-drama italic text-5xl text-offwhite hover:text-accent transition-colors leading-tight">{label}</button>
         ))}
       </div>
       <button
@@ -117,6 +114,7 @@ function Navbar() {
           <a href="#faciliteiten" className="hover:text-white link-lift">Faciliteiten</a>
           <a href="#werkwijze" className="hover:text-white link-lift">Werkwijze</a>
           <a href="#prijzen" className="hover:text-white link-lift">Tarieven</a>
+          <Link to="/blog" className="hover:text-white link-lift">Blog</Link>
         </div>
         <button onClick={() => document.getElementById('prijzen')?.scrollIntoView({ behavior: 'smooth' })} className="magnetic-btn hidden md:block bg-accent text-white px-6 py-2.5 rounded-full font-heading font-bold text-sm tracking-wide">
           Boek de Studio
