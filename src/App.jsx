@@ -185,6 +185,15 @@ function Hero() {
 function Home() {
   const [bookingConfig, setBookingConfig] = useState(null);
 
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      setTimeout(() => {
+        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, []);
+
   return (
     <main className="bg-background min-h-screen text-offwhite overflow-hidden selection:bg-accent selection:text-white">
       <Navbar />

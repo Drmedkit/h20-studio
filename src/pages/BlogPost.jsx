@@ -21,7 +21,8 @@ export default function BlogPost() {
     }
 
     const paragraphs = post.content.split('\n\n');
-    const otherPosts = blogPosts.filter(p => p.slug !== slug).slice(0, 2);
+    const todayStr = new Date().toLocaleDateString('sv');
+    const otherPosts = blogPosts.filter(p => p.slug !== slug && p.publishDate <= todayStr).slice(0, 2);
 
     return (
         <div className="bg-background min-h-screen text-offwhite">
