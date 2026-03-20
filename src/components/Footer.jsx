@@ -37,12 +37,12 @@ export default function Footer() {
                 {/* Links 2 */}
                 <div className="flex flex-col gap-4">
                     <h4 className="font-heading font-bold text-lg mb-2">Locatie</h4>
-                    <p className="font-data text-sm text-offwhite/50 leading-relaxed">
+                    <a href="https://h20.gg" target="_blank" rel="noopener noreferrer" className="font-data text-sm text-offwhite/50 hover:text-white transition-colors leading-relaxed inline-block">
                         Spinnekop 2<br />
                         1444 GN Purmerend<br />
                         Nederland
-                    </p>
-                    <a href="mailto:info@h20.gg" className="font-data text-sm text-accent hover:text-white transition-colors mt-2">info@h20.gg</a>
+                    </a>
+                    <a href="mailto:sales@h20.gg" className="font-data text-sm text-accent hover:text-white transition-colors mt-2">sales@h20.gg</a>
                 </div>
             </div>
 
