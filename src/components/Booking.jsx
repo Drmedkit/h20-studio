@@ -64,6 +64,7 @@ export default function Booking({ bookingConfig, setBookingConfig }) {
     const [selectedTime, setSelectedTime] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [project, setProject] = useState('');
     const [status, setStatus] = useState('idle'); // idle | loading | success | error
 
@@ -89,6 +90,7 @@ export default function Booking({ bookingConfig, setBookingConfig }) {
                 body: JSON.stringify({
                     naam: name,
                     email,
+                    telefoon: phone,
                     pakket: bookingLabel,
                     addons: bookingConfig?.addons?.map(a => a.label).join(', ') || '',
                     datum: `${selectedDate} Okt 2026`,
@@ -256,6 +258,17 @@ export default function Booking({ bookingConfig, setBookingConfig }) {
                                 )}
                             </div>
 
+                            {/* Phone */}
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="phone" className="font-data text-xs text-offwhite/50 uppercase tracking-widest">Telefoonnummer</label>
+                                <input
+                                    type="tel" id="phone" value={phone}
+                                    onChange={e => setPhone(e.target.value)}
+                                    placeholder="+31 6 00 00 00 00"
+                                    className="bg-surface border border-offwhite/10 rounded-xl px-4 py-3 font-data text-offwhite placeholder:text-offwhite/20 focus:outline-none focus:border-accent transition-colors"
+                                />
+                            </div>
+
                             {/* Project details */}
                             <div className="flex flex-col gap-2">
                                 <label htmlFor="project" className="font-data text-xs text-offwhite/50 uppercase tracking-widest">Project Details</label>
@@ -294,7 +307,7 @@ export default function Booking({ bookingConfig, setBookingConfig }) {
                             {status === 'error' && (
                                 <p className="text-center font-data text-[11px] text-red-400 mt-1">Er ging iets mis. Probeer het opnieuw of mail ons direct.</p>
                             )}
-                            <p className="text-center font-data text-[10px] text-offwhite/40 mt-2">Wij delen je gegevens nooit met derden.</p>
+                            <p className="text-center font-data text-[11px] text-offwhite/40 mt-2 leading-relaxed max-w-sm mx-auto">Je aanvraag wordt zo snel mogelijk opgepakt door ons sales team. Wij nemen binnen 24 uur contact met je op om je boeking te bevestigen.</p>
                         </form>
                     </div>
 
