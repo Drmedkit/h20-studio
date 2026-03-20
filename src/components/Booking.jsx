@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar as CalendarIcon, Clock, Check } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, Check, Loader2 } from 'lucide-react';
+
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxCJc-qc31onGGR1xzgnZckq7yEHz7eo1r1x7NrTZxkhV9TRogXISlLcpYLcmSPm8Fq/exec';
 
 // ── Time slot config based on what the user chose ──────────────────────────
 function getSlotConfig(bookingConfig) {
@@ -62,6 +64,8 @@ export default function Booking({ bookingConfig, setBookingConfig }) {
     const [selectedTime, setSelectedTime] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [project, setProject] = useState('');
+    const [status, setStatus] = useState('idle'); // idle | loading | success | error
 
     const slotConfig = getSlotConfig(bookingConfig);
     const copy = getSectionCopy(bookingConfig?.goal);
@@ -73,6 +77,30 @@ export default function Booking({ bookingConfig, setBookingConfig }) {
     useEffect(() => {
         setSelectedTime(slotConfig.slots[0] ?? '');
     }, [bookingConfig?.goal, bookingConfig?.pkg]);
+
+    async function handleSubmit() {
+        if (!name || !email) return;
+        setStatus('loading');
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    naam: name,
+                    email,
+                    pakket: bookingLabel,
+                    addons: bookingConfig?.addons?.map(a => a.label).join(', ') || '',
+                    datum: `${selectedDate} Okt 2026`,
+                    tijdslot: selectedTime,
+                    project,
+                }),
+            });
+            setStatus('success');
+        } catch {
+            setStatus('error');
+        }
+    }
 
     return (
         <section id="boeken" className="py-32 px-6 md:px-12 bg-surface relative z-10 w-full flex items-center justify-center border-t border-offwhite/5 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
@@ -233,18 +261,39 @@ export default function Booking({ bookingConfig, setBookingConfig }) {
                                 <label htmlFor="project" className="font-data text-xs text-offwhite/50 uppercase tracking-widest">Project Details</label>
                                 <textarea
                                     id="project" rows="3"
+                                    value={project}
+                                    onChange={e => setProject(e.target.value)}
                                     placeholder="Vertel ons kort over het soort podcast of video, speciale benodigdheden, etc."
                                     className="bg-surface border border-offwhite/10 rounded-xl px-4 py-3 font-data text-offwhite placeholder:text-offwhite/20 focus:outline-none focus:border-accent transition-colors resize-none"
                                 />
                             </div>
 
-                            <button
-                                type="button"
-                                className="magnetic-btn mt-4 w-full group flex items-center justify-center gap-3 bg-accent text-white px-8 py-4 rounded-xl font-heading font-bold text-lg uppercase tracking-wider hover:bg-red-600 transition-colors"
-                            >
-                                <span>Verstuur Aanvraag</span>
-                                <Check className="w-5 h-5 opacity-0 -ml-8 group-hover:opacity-100 group-hover:ml-0 transition-all" />
-                            </button>
+                            {status === 'success' ? (
+                                <div className="mt-4 w-full flex flex-col items-center gap-3 bg-accent/10 border border-accent/30 rounded-xl px-8 py-6">
+                                    <Check className="w-8 h-8 text-accent" />
+                                    <p className="font-heading font-bold text-offwhite text-lg text-center">Aanvraag Ontvangen.</p>
+                                    <p className="font-data text-offwhite/50 text-sm text-center">We nemen binnen 24 uur contact met je op.</p>
+                                </div>
+                            ) : (
+                                <button
+                                    type="button"
+                                    onClick={handleSubmit}
+                                    disabled={!name || !email || status === 'loading'}
+                                    className="magnetic-btn mt-4 w-full group flex items-center justify-center gap-3 bg-accent text-white px-8 py-4 rounded-xl font-heading font-bold text-lg uppercase tracking-wider hover:bg-red-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                                >
+                                    {status === 'loading' ? (
+                                        <Loader2 className="w-5 h-5 animate-spin" />
+                                    ) : (
+                                        <>
+                                            <span>Verstuur Aanvraag</span>
+                                            <Check className="w-5 h-5 opacity-0 -ml-8 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                                        </>
+                                    )}
+                                </button>
+                            )}
+                            {status === 'error' && (
+                                <p className="text-center font-data text-[11px] text-red-400 mt-1">Er ging iets mis. Probeer het opnieuw of mail ons direct.</p>
+                            )}
                             <p className="text-center font-data text-[10px] text-offwhite/40 mt-2">Wij delen je gegevens nooit met derden.</p>
                         </form>
                     </div>
