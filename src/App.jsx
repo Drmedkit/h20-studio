@@ -160,7 +160,7 @@ function Hero() {
             </span>
           </h1>
           <p className="hero-text mt-8 font-data text-lg md:text-xl text-offwhite/70 max-w-xl leading-relaxed">
-            Huur een professionele podcast studio van hoge kwaliteit. Plug & play apparatuur, volledige technische ontzorging en een premium setting in het H20 Esports Campus.
+            Huur een professionele podcast studio van hoge kwaliteit. Plug & play apparatuur, volledige technische ontzorging en een premium setting bij H20.
           </p>
           <div className="hero-cta mt-10">
             <button onClick={() => document.getElementById('prijzen')?.scrollIntoView({ behavior: 'smooth' })} className="magnetic-btn group flex items-center gap-3 bg-white text-background px-8 py-4 rounded-full font-heading font-bold text-lg">

@@ -20,7 +20,7 @@ export default function Footer() {
                         <img src="/h20-studio-logo.png" alt="H20 Studio Logo" className="h-12 object-contain" />
                     </div>
                     <p className="font-data text-offwhite/60 max-w-sm leading-relaxed text-sm">
-                        Gaming Impacting the World. Dé plek voor professionele podcasts en video producties in het hart van de H20 Esports Campus.
+                        Gaming Impacting the World. Dé plek voor professionele podcasts en video producties.
                     </p>
                 </div>
 
@@ -56,7 +56,7 @@ export default function Footer() {
                 <div className="flex gap-6 font-data text-xs text-offwhite/40">
                     <a href="#" className="hover:text-offwhite transition-colors">Algemene Voorwaarden</a>
                     <a href="#" className="hover:text-offwhite transition-colors">Privacybeleid</a>
-                    <span>&copy; {new Date().getFullYear()} H20 Esports Campus</span>
+                    <span>&copy; {new Date().getFullYear()} H20</span>
                 </div>
             </div>
         </footer>
