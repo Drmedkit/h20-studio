@@ -4,6 +4,7 @@ export const blogPosts = [
         title: 'H20 en NoCowboys lanceren high-end podcast studio en creatieve productie samenwerking',
         excerpt: 'H20 en NoCowboys slaan de handen ineen voor de lancering van een state-of-the-art podcast studio. Een nieuwe standaard voor podcasting en branded content in Nederland.',
         date: '2026-03-20',
+        publishDate: '2026-03-20',
         readTime: '4 min',
         category: 'Nieuws',
         content: `Purmerend, 20 maart 2026 – H20 en NoCowboys slaan de handen ineen voor de lancering van een state-of-the-art podcast studio op de 1e verdieping van de innovatieve hub in H20. Met deze samenwerking combineren beide partijen hun expertise in creatieve technologie en hoogwaardige contentproductie, met als doel een nieuwe standaard te zetten voor podcasting en branded content in Nederland.
@@ -56,7 +57,8 @@ NoCowboys is een creatief productiebedrijf gespecialiseerd in podcasts en brande
         slug: 'professionele-podcast-maken-in-een-dag',
         title: 'Zo maak je een professionele podcast in één dag',
         excerpt: 'Van concept naar kant-en-klare aflevering binnen één studiosessie. We leggen uit hoe de workflow eruitziet bij H20 Studio.',
-        date: '2026-03-10',
+        date: '2026-03-27',
+        publishDate: '2026-03-27',
         readTime: '5 min',
         category: 'Werkwijze',
         content: `
@@ -89,7 +91,8 @@ Met de juiste voorbereiding en een goed uitgerust studio-team is één dag meer 
         slug: 'wat-kost-podcast-studio-huren-nederland',
         title: 'Wat kost een podcast studio huren in Nederland?',
         excerpt: 'Een eerlijk overzicht van de kosten, wat je wel en niet krijgt bij de gemiddelde studio, en waarom all-in pricing transparanter is.',
-        date: '2026-03-01',
+        date: '2026-04-03',
+        publishDate: '2026-04-03',
         readTime: '4 min',
         category: 'Tarieven',
         content: `
@@ -124,7 +127,8 @@ Transparantie in pricing bespaart je niet alleen geld, maar ook verrassingen ach
         slug: '4-camera-live-de-nieuwe-standaard',
         title: '4-camera live: waarom dit de standaard zou moeten zijn',
         excerpt: 'Eén camera maakt een opname. Vier camera\'s live geschakeld maken een broadcast. Het verschil in eindresultaat is groter dan je denkt.',
-        date: '2026-02-20',
+        date: '2026-04-10',
+        publishDate: '2026-04-10',
         readTime: '3 min',
         category: 'Techniek',
         content: `

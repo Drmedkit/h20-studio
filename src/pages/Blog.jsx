@@ -4,6 +4,11 @@ import { ArrowRight } from 'lucide-react';
 import BlogNavbar from '../components/BlogNavbar';
 import { blogPosts } from '../data/blogPosts';
 
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const visiblePosts = blogPosts.filter(p => new Date(p.publishDate) <= today);
+
 export default function Blog() {
     return (
         <div className="bg-background min-h-screen text-offwhite">
@@ -26,7 +31,7 @@ export default function Blog() {
             {/* Posts grid */}
             <section className="px-6 md:px-12 py-24">
                 <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {blogPosts.map((post) => (
+                    {visiblePosts.map((post) => (
                         <Link
                             key={post.slug}
                             to={`/blog/${post.slug}`}
