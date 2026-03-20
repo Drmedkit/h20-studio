@@ -48,6 +48,21 @@ export default function BlogPost() {
                 </div>
             </section>
 
+            {/* Hero image */}
+            {post.image && (
+                <div className="px-6 md:px-12 py-8">
+                    <div className="max-w-3xl mx-auto rounded-3xl overflow-hidden">
+                        <img
+                            src={post.image}
+                            alt={post.title}
+                            className="w-full object-cover max-h-[500px]"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </div>
+                </div>
+            )}
+
             {/* Article content */}
             <article className="px-6 md:px-12 py-16">
                 <div className="max-w-3xl mx-auto flex flex-col gap-6">

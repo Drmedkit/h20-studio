@@ -7,6 +7,7 @@ export const blogPosts = [
         publishDate: '2026-03-20',
         readTime: '4 min',
         category: 'Nieuws',
+        image: '/blog-lancering.jpg',
         content: `Purmerend, 20 maart 2026 – H20 en NoCowboys slaan de handen ineen voor de lancering van een state-of-the-art podcast studio op de 1e verdieping van de innovatieve hub in H20. Met deze samenwerking combineren beide partijen hun expertise in creatieve technologie en hoogwaardige contentproductie, met als doel een nieuwe standaard te zetten voor podcasting en branded content in Nederland.
 
 De nieuwe studio biedt makers, bedrijven en creators toegang tot een professionele opname omgeving binnen een ecosysteem waar gaming, esports en creative tech samenkomen. De lancering markeert een volgende stap in de ontwikkeling van H20 als toonaangevende hub voor innovatie, educatie en media binnen de digitale economie.
