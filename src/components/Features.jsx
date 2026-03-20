@@ -46,6 +46,8 @@ function FeatureParallax({ image, topSub, topMain, bottomSub, bottomAccent, bott
                     src={image}
                     alt="H20 Studio Feature"
                     className={`w-full h-[120%] -top-[10%] left-0 absolute object-cover ${imagePosition} opacity-50 sepia-[0.3] ${hueRotate}`}
+                    loading="lazy"
+                    decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-background via-background/20 via-30% via-transparent via-50% via-transparent via-70% via-background/20 to-background"></div>
             </div>

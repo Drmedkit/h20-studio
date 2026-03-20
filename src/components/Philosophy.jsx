@@ -48,6 +48,8 @@ export default function Philosophy() {
                     src="/complete ontzorging.jpg"
                     alt="H20 Studio Sfeer"
                     className="w-full h-[120%] -top-[10%] left-0 absolute object-cover opacity-50 sepia-[0.3] hue-rotate-[-30deg]"
+                    loading="lazy"
+                    decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-background via-background/20 via-30% via-transparent via-50% via-transparent via-70% via-background/20 to-background"></div>
             </div>
