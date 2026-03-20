@@ -4,10 +4,9 @@ import { ArrowRight } from 'lucide-react';
 import BlogNavbar from '../components/BlogNavbar';
 import { blogPosts } from '../data/blogPosts';
 
-const today = new Date();
-today.setHours(0, 0, 0, 0);
+const todayStr = new Date().toLocaleDateString('sv'); // 'YYYY-MM-DD' in local timezone
 
-const visiblePosts = blogPosts.filter(p => new Date(p.publishDate) <= today);
+const visiblePosts = blogPosts.filter(p => p.publishDate <= todayStr);
 
 export default function Blog() {
     return (
