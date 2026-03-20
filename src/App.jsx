@@ -13,6 +13,53 @@ import Footer from './components/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
+function MobileMenu({ onClose }) {
+  const overlayRef = useRef(null);
+  const itemsRef = useRef(null);
+
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.from(overlayRef.current, { opacity: 0, duration: 0.3 })
+      .from('.mobile-menu-item', { y: 40, opacity: 0, stagger: 0.08, duration: 0.5 }, '-=0.1')
+      .from('.mobile-menu-cta', { y: 20, opacity: 0, duration: 0.4 }, '-=0.2');
+  }, { scope: overlayRef });
+
+  function scrollTo(id) {
+    gsap.to(overlayRef.current, {
+      opacity: 0, duration: 0.25, ease: 'power2.in',
+      onComplete: () => { onClose(); document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  }
+
+  const links = [
+    { label: 'Faciliteiten', id: 'faciliteiten' },
+    { label: 'Werkwijze',    id: 'werkwijze'    },
+    { label: 'Tarieven',     id: 'prijzen'      },
+  ];
+
+  return (
+    <div ref={overlayRef} className="fixed inset-0 z-40 bg-background/97 backdrop-blur-xl flex flex-col items-center justify-center gap-2 px-8">
+      <div ref={itemsRef} className="flex flex-col items-center gap-8 w-full">
+        {links.map(({ label, id }) => (
+          <button
+            key={id}
+            onClick={() => scrollTo(id)}
+            className="mobile-menu-item w-full text-center font-drama italic text-5xl text-offwhite hover:text-accent transition-colors leading-tight"
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      <button
+        onClick={() => scrollTo('prijzen')}
+        className="mobile-menu-cta mt-12 bg-accent text-white px-12 py-4 rounded-full font-heading font-bold text-lg tracking-wide"
+      >
+        Boek de Studio
+      </button>
+    </div>
+  );
+}
+
 function Navbar() {
   const navRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,11 +71,6 @@ function Navbar() {
       toggleClass: { className: 'nav-scrolled', targets: navRef.current }
     });
   }, { scope: navRef });
-
-  function scrollTo(id) {
-    setMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  }
 
   return (
     <>
@@ -44,22 +86,12 @@ function Navbar() {
         <button onClick={() => document.getElementById('prijzen')?.scrollIntoView({ behavior: 'smooth' })} className="magnetic-btn hidden md:block bg-accent text-white px-6 py-2.5 rounded-full font-heading font-bold text-sm tracking-wide">
           Boek de Studio
         </button>
-        <button onClick={() => setMenuOpen(o => !o)} className="md:hidden text-offwhite p-1">
+        <button onClick={() => setMenuOpen(o => !o)} className="md:hidden text-offwhite p-1 z-50 relative">
           {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </nav>
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center gap-10">
-          <a onClick={() => scrollTo('faciliteiten')} className="font-heading font-bold text-4xl text-offwhite tracking-tight cursor-pointer hover:text-accent transition-colors">Faciliteiten</a>
-          <a onClick={() => scrollTo('werkwijze')} className="font-heading font-bold text-4xl text-offwhite tracking-tight cursor-pointer hover:text-accent transition-colors">Werkwijze</a>
-          <a onClick={() => scrollTo('prijzen')} className="font-heading font-bold text-4xl text-offwhite tracking-tight cursor-pointer hover:text-accent transition-colors">Tarieven</a>
-          <button onClick={() => scrollTo('prijzen')} className="mt-4 bg-accent text-white px-10 py-4 rounded-full font-heading font-bold text-lg tracking-wide">
-            Boek de Studio
-          </button>
-        </div>
-      )}
+      {menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} />}
     </>
   );
 }
