@@ -1,5 +1,58 @@
 export const blogPosts = [
     {
+        slug: 'h20-nocowboys-lancering-podcast-studio',
+        title: 'H20 en NoCowboys lanceren high-end podcast studio en creatieve productie samenwerking',
+        excerpt: 'H20 en NoCowboys slaan de handen ineen voor de lancering van een state-of-the-art podcast studio. Een nieuwe standaard voor podcasting en branded content in Nederland.',
+        date: '2026-03-20',
+        readTime: '4 min',
+        category: 'Nieuws',
+        content: `Purmerend, 20 maart 2026 – H20 en NoCowboys slaan de handen ineen voor de lancering van een state-of-the-art podcast studio op de 1e verdieping van de innovatieve hub in H20. Met deze samenwerking combineren beide partijen hun expertise in creatieve technologie en hoogwaardige contentproductie, met als doel een nieuwe standaard te zetten voor podcasting en branded content in Nederland.
+
+De nieuwe studio biedt makers, bedrijven en creators toegang tot een professionele opname omgeving binnen een ecosysteem waar gaming, esports en creative tech samenkomen. De lancering markeert een volgende stap in de ontwikkeling van H20 als toonaangevende hub voor innovatie, educatie en media binnen de digitale economie.
+
+## Creatieve technologie ontmoet hoogwaardige contentproductie
+
+H20 staat bekend als een plek waar talent, bedrijven en onderwijs samenkomen rondom gaming en creatieve technologie en fungeert als broedplaats voor innovatie en biedt ruimte aan events, opleidingen en audiovisuele producties.
+
+Met NoCowboys als productiepartner wordt deze infrastructuur nu uitgebreid met professionele podcast- en contentproducties. NoCowboys brengt jarenlange ervaring in storytelling, formatontwikkeling en distributie, en zorgt ervoor dat ideeën worden vertaald naar kwalitatieve, impactvolle content.
+
+Samen creëren de partijen een full-service oplossing: van concept en opname tot montage en publicatie.
+
+## Nieuwe standaard voor podcasting binnen de tech-community
+
+De podcast studio is ontworpen voor maximale flexibiliteit en kwaliteit. Of het nu gaat om zakelijke podcasts, branded series, videocontent of live opnames: de studio biedt een omgeving waarin creativiteit en technologie samenkomen.
+
+Door de locatie binnen H20 profiteren gebruikers bovendien van een unieke context: een levendige community van start-ups, creators, gamers en techbedrijven. Dit maakt de studio niet alleen een productieruimte, maar ook een ontmoetingsplek voor samenwerking en innovatie.
+
+## Quotes
+
+Matthijs Vink, founder van H20:
+"Met deze podcast studio zetten we een volgende stap in onze missie om een toonaangevend ecosysteem te bouwen waar creatieve technologie centraal staat. Door de samenwerking met NoCowboys voegen we hoogwaardige contentproductie toe aan onze locatie. Dit stelt bedrijven en makers in staat om hun verhaal op een professionele en impactvolle manier te vertellen, midden in een omgeving die innovatie ademt."
+
+Peter Bronkhorst, oprichter van NoCowboys:
+"Wij geloven dat sterke verhalen het verschil maken. Door samen te werken met H20 combineren we onze expertise in contentproductie en techniek met een unieke creatieve omgeving. Deze studio maakt het mogelijk om podcasts en formats te ontwikkelen die niet alleen technisch van hoog niveau zijn, maar ook betaalbaar, inhoudelijk relevant en onderscheidend."
+
+## Open middag: ervaar de studio zelf
+
+Ter gelegenheid van de lancering organiseren H20 en NoCowboys een open middag op vrijdag 3 april van 15:30 tot 18:30 uur. Tijdens deze middag is de studio vrij toegankelijk voor iedereen.
+
+Bezoekers krijgen de kans om:
+
+- De podcast studio en faciliteiten te bekijken
+- Kennismaken met de mogelijkheden van podcasting en contentproductie
+- Eenmalig gratis een screentest op te nemen om de studio zelf te ervaren
+
+De open middag is bedoeld voor bedrijven, instellingen, scholen, creators, marketeers en iedereen met interesse in podcasting en digitale content.
+
+## Over H20
+
+H20 is een toonaangevende hub waar esports, gaming en creative tech samenkomen. De plek biedt ruimte aan talentontwikkeling, evenementen, startups en innovatieve mediaproducties, en speelt een belangrijke rol in het opleiden van de volgende generatie digitale professionals.
+
+## Over NoCowboys
+
+NoCowboys is een creatief productiebedrijf gespecialiseerd in podcasts en branded content. Met een focus op storytelling en kwaliteit helpt NoCowboys merken en organisaties om hun verhaal te vertalen naar impactvolle formats.`,
+    },
+    {
         slug: 'professionele-podcast-maken-in-een-dag',
         title: 'Zo maak je een professionele podcast in één dag',
         excerpt: 'Van concept naar kant-en-klare aflevering binnen één studiosessie. We leggen uit hoe de workflow eruitziet bij H20 Studio.',
