@@ -100,9 +100,9 @@ function Navbar() {
   return (
     <>
       <nav ref={navRef} className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-6xl px-6 py-4 flex items-center justify-between rounded-full border border-transparent transition-all duration-500 bg-surface/60 backdrop-blur-xl border-offwhite/10">
-        <div className="flex items-center">
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center">
           <img src="/h20-studio-logo.png" alt="H20 Studio Logo" className="h-10 object-contain" />
-        </div>
+        </button>
         <div className="hidden md:flex items-center gap-8 font-data text-sm uppercase tracking-wider text-offwhite/80">
           <a href="#faciliteiten" className="hover:text-white link-lift">Faciliteiten</a>
           <a href="#werkwijze" className="hover:text-white link-lift">Werkwijze</a>
