@@ -134,9 +134,9 @@ export default function Pricing({ setBookingConfig }) {
         setTimeout(() => {
             setActiveStep(2);
             setTimeout(() => {
-                document.getElementById('addons-step')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 150);
-        }, 350);
+                document.getElementById('addons-step')?.scrollIntoView({ behavior: 'smooth' });
+            }, 400);
+        }, 550);
     };
 
     const toggleAddon = (addonId) => {
