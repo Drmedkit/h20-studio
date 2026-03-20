@@ -45,7 +45,7 @@ export default function Footer() {
 
                 {/* Locaties */}
                 <div className="flex flex-col gap-4">
-                    <h4 className="font-heading font-bold text-lg mb-2">Locaties</h4>
+                    <h4 className="font-heading font-bold text-lg mb-2">Bereikbaar vanuit</h4>
                     {locations.map(({ label, path }) => (
                         <Link
                             key={path}
