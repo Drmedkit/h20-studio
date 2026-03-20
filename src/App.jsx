@@ -26,9 +26,8 @@ function Navbar() {
 
   return (
     <nav ref={navRef} className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-6xl px-6 py-4 flex items-center justify-between rounded-full border border-transparent transition-all duration-500 bg-surface/60 backdrop-blur-xl border-offwhite/10">
-      <div className="flex items-center gap-3">
-        <img src="/H20 - basic - rood.png" alt="H20 Studio Logo" className="h-8 w-8 object-contain" />
-        <span className="font-heading font-bold text-xl tracking-tighter">H20 STUDIO</span>
+      <div className="flex items-center">
+        <img src="/h20-studio-logo.png" alt="H20 Studio Logo" className="h-8 object-contain" />
       </div>
       <div className="hidden md:flex items-center gap-8 font-data text-sm uppercase tracking-wider text-offwhite/80">
         <a href="#faciliteiten" className="hover:text-white link-lift">Faciliteiten</a>

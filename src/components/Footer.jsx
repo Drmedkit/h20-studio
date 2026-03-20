@@ -16,9 +16,8 @@ export default function Footer() {
 
                 {/* Brand */}
                 <div className="md:col-span-2 flex flex-col gap-6">
-                    <div className="flex items-center gap-3">
-                        <img src="/H20 - basic - rood.png" alt="H20 Logo" className="h-10 w-10 object-contain" />
-                        <span className="font-heading font-bold text-2xl tracking-tighter">H20 STUDIO</span>
+                    <div className="flex items-center">
+                        <img src="/h20-studio-logo.png" alt="H20 Studio Logo" className="h-10 object-contain" />
                     </div>
                     <p className="font-data text-offwhite/60 max-w-sm leading-relaxed text-sm">
                         Gaming Impacting the World. Dé plek voor professionele podcasts en video producties in het hart van de H20 Esports Campus.
