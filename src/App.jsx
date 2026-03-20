@@ -34,7 +34,7 @@ function Navbar() {
         <a href="#werkwijze" className="hover:text-white link-lift">Werkwijze</a>
         <a href="#prijzen" className="hover:text-white link-lift">Tarieven</a>
       </div>
-      <button onClick={() => document.getElementById('boeken')?.scrollIntoView({ behavior: 'smooth' })} className="magnetic-btn bg-accent text-white px-6 py-2.5 rounded-full font-heading font-bold text-sm tracking-wide">
+      <button onClick={() => document.getElementById('prijzen')?.scrollIntoView({ behavior: 'smooth' })} className="magnetic-btn bg-accent text-white px-6 py-2.5 rounded-full font-heading font-bold text-sm tracking-wide">
         Boek de Studio
       </button>
     </nav>
@@ -83,8 +83,8 @@ function Hero() {
             Huur een professionele podcast studio van hoge kwaliteit. Plug & play apparatuur, volledige technische ontzorging en een premium setting in het H20 Esports Campus.
           </p>
           <div className="hero-cta mt-10">
-            <button className="magnetic-btn group flex items-center gap-3 bg-white text-background px-8 py-4 rounded-full font-heading font-bold text-lg">
-              <span>Bekijk Beschikbaarheid</span>
+            <button onClick={() => document.getElementById('prijzen')?.scrollIntoView({ behavior: 'smooth' })} className="magnetic-btn group flex items-center gap-3 bg-white text-background px-8 py-4 rounded-full font-heading font-bold text-lg">
+              <span>Bekijk Pakketten</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
