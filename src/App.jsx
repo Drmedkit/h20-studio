@@ -70,6 +70,21 @@ function Navbar() {
       end: 99999,
       toggleClass: { className: 'nav-scrolled', targets: navRef.current }
     });
+
+    let lastY = 0;
+    ScrollTrigger.create({
+      start: 'top -80',
+      end: 99999,
+      onUpdate: (self) => {
+        const currentY = self.scroll();
+        if (currentY > lastY) {
+          gsap.to(navRef.current, { y: '-150%', duration: 0.35, ease: 'power2.in' });
+        } else {
+          gsap.to(navRef.current, { y: '0%', duration: 0.35, ease: 'power2.out' });
+        }
+        lastY = currentY;
+      }
+    });
   }, { scope: navRef });
 
   return (
