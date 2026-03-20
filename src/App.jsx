@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -70,22 +70,32 @@ function Navbar() {
       end: 99999,
       toggleClass: { className: 'nav-scrolled', targets: navRef.current }
     });
+  });
 
-    let lastY = 0;
-    ScrollTrigger.create({
-      start: 'top -80',
-      end: 99999,
-      onUpdate: (self) => {
-        const currentY = self.scroll();
-        if (currentY > lastY) {
-          gsap.to(navRef.current, { y: '-150%', duration: 0.35, ease: 'power2.in' });
-        } else {
-          gsap.to(navRef.current, { y: '0%', duration: 0.35, ease: 'power2.out' });
+  useEffect(() => {
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const currentY = window.scrollY;
+        if (currentY < 80) {
+          gsap.to(navRef.current, { y: '0%', duration: 0.4, ease: 'power2.out' });
+        } else if (currentY > lastY + 8) {
+          gsap.to(navRef.current, { y: '-150%', duration: 0.4, ease: 'power2.in' });
+        } else if (currentY < lastY - 8) {
+          gsap.to(navRef.current, { y: '0%', duration: 0.4, ease: 'power2.out' });
         }
         lastY = currentY;
-      }
-    });
-  }, { scope: navRef });
+        ticking = false;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
