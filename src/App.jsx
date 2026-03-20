@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -208,9 +208,20 @@ function Home() {
   );
 }
 
+function GTMPageTracker() {
+  const location = useLocation();
+  useEffect(() => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'pageview', page: location.pathname });
+  }, [location.pathname]);
+  return null;
+}
+
 export default function App() {
   return (
-    <Routes>
+    <>
+      <GTMPageTracker />
+      <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/podcast-studio-purmerend"       element={<Purmerend />} />
       <Route path="/podcast-studio-hoorn"           element={<Hoorn />} />
@@ -221,5 +232,6 @@ export default function App() {
       <Route path="/blog"                           element={<Blog />} />
       <Route path="/blog/:slug"                     element={<BlogPost />} />
     </Routes>
+    </>
   );
 }
