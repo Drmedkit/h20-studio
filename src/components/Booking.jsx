@@ -59,8 +59,23 @@ function getBookingLabel(bookingConfig) {
 }
 
 // ── Component ──────────────────────────────────────────────────────────────
+const MONTH_NAMES = ['Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December'];
+
+function daysInMonth(year, month) {
+    return new Date(year, month + 1, 0).getDate();
+}
+
+// Monday-first offset (0=Ma, 6=Zo)
+function monthStartOffset(year, month) {
+    const day = new Date(year, month, 1).getDay(); // 0=Sun
+    return (day + 6) % 7;
+}
+
 export default function Booking({ bookingConfig, setBookingConfig }) {
-    const [selectedDate, setSelectedDate] = useState(15);
+    const today = new Date();
+    const [viewYear, setViewYear] = useState(today.getFullYear());
+    const [viewMonth, setViewMonth] = useState(today.getMonth());
+    const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTime, setSelectedTime] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -72,9 +87,35 @@ export default function Booking({ bookingConfig, setBookingConfig }) {
     const copy = getSectionCopy(bookingConfig?.goal);
     const bookingLabel = getBookingLabel(bookingConfig);
     const days = ['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'];
-    const dates = Array.from({ length: 31 }, (_, i) => i + 1);
 
-    // Reset selected time when slot config changes
+    const totalDays = daysInMonth(viewYear, viewMonth);
+    const startOffset = monthStartOffset(viewYear, viewMonth);
+    const dates = Array.from({ length: totalDays }, (_, i) => i + 1);
+
+    function prevMonth() {
+        if (viewMonth === 0) { setViewMonth(11); setViewYear(y => y - 1); }
+        else setViewMonth(m => m - 1);
+        setSelectedDate(null);
+    }
+
+    function nextMonth() {
+        if (viewMonth === 11) { setViewMonth(0); setViewYear(y => y + 1); }
+        else setViewMonth(m => m + 1);
+        setSelectedDate(null);
+    }
+
+    function isPastDate(date) {
+        const d = new Date(viewYear, viewMonth, date);
+        const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        return d < todayStart;
+    }
+
+    const isPrevMonthDisabled = viewYear === today.getFullYear() && viewMonth === today.getMonth();
+
+    const formattedDate = selectedDate
+        ? `${selectedDate} ${MONTH_NAMES[viewMonth]} ${viewYear}`
+        : '—';
+
     useEffect(() => {
         setSelectedTime(slotConfig.slots[0] ?? '');
     }, [bookingConfig?.goal, bookingConfig?.pkg]);
@@ -93,7 +134,7 @@ export default function Booking({ bookingConfig, setBookingConfig }) {
                     telefoon: phone,
                     pakket: bookingLabel,
                     addons: bookingConfig?.addons?.map(a => a.label).join(', ') || '',
-                    datum: `${selectedDate} Okt 2026`,
+                    datum: formattedDate,
                     tijdslot: selectedTime,
                     project,
                 }),
@@ -125,20 +166,30 @@ export default function Booking({ bookingConfig, setBookingConfig }) {
                             <div className="flex items-center justify-between mb-8">
                                 <h3 className="font-heading font-bold text-xl text-offwhite uppercase tracking-widest flex items-center gap-3">
                                     <CalendarIcon className="w-5 h-5 text-accent" />
-                                    Oktober 2026
+                                    {MONTH_NAMES[viewMonth]} {viewYear}
                                 </h3>
                                 <div className="flex gap-2">
-                                    <button className="w-8 h-8 rounded-full border border-offwhite/20 flex items-center justify-center hover:bg-offwhite/10 transition-colors text-offwhite/50 hover:text-white">&lt;</button>
-                                    <button className="w-8 h-8 rounded-full border border-offwhite/20 flex items-center justify-center hover:bg-offwhite/10 transition-colors text-offwhite/50 hover:text-white">&gt;</button>
+                                    <button
+                                        onClick={prevMonth}
+                                        disabled={isPrevMonthDisabled}
+                                        className="w-8 h-8 rounded-full border border-offwhite/20 flex items-center justify-center hover:bg-offwhite/10 transition-colors text-offwhite/50 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed"
+                                    >&lt;</button>
+                                    <button
+                                        onClick={nextMonth}
+                                        className="w-8 h-8 rounded-full border border-offwhite/20 flex items-center justify-center hover:bg-offwhite/10 transition-colors text-offwhite/50 hover:text-white"
+                                    >&gt;</button>
                                 </div>
                             </div>
                             <div className="grid grid-cols-7 gap-y-4 mb-4">
                                 {days.map(day => (
                                     <div key={day} className="text-center font-data text-xs text-offwhite/40">{day}</div>
                                 ))}
+                                {Array.from({ length: startOffset }).map((_, i) => (
+                                    <div key={`empty-${i}`} />
+                                ))}
                                 {dates.map(date => {
                                     const isSelected = date === selectedDate;
-                                    const isPast = date < 12;
+                                    const isPast = isPastDate(date);
                                     return (
                                         <button
                                             key={date}
@@ -194,7 +245,7 @@ export default function Booking({ bookingConfig, setBookingConfig }) {
                                 <div className="w-1/2 flex flex-col gap-2">
                                     <label className="font-data text-xs text-offwhite/50 uppercase tracking-widest">Datum</label>
                                     <div className="font-heading font-bold text-xl text-offwhite bg-surface/50 px-4 py-3 rounded-xl border border-offwhite/5">
-                                        {selectedDate} Okt 2026
+                                        {formattedDate}
                                     </div>
                                 </div>
                                 <div className="w-1/2 flex flex-col gap-2">
@@ -291,7 +342,7 @@ export default function Booking({ bookingConfig, setBookingConfig }) {
                                 <button
                                     type="button"
                                     onClick={handleSubmit}
-                                    disabled={!name || !email || status === 'loading'}
+                                    disabled={!name || !email || !selectedDate || status === 'loading'}
                                     className="magnetic-btn mt-4 w-full group flex items-center justify-center gap-3 bg-accent text-white px-8 py-4 rounded-xl font-heading font-bold text-lg uppercase tracking-wider hover:bg-red-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                                 >
                                     {status === 'loading' ? (
