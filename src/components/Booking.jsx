@@ -140,6 +140,11 @@ export default function Booking({ bookingConfig, setBookingConfig }) {
                 }),
             });
             setStatus('success');
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'form_success',
+                form_name: 'boeking studio',
+            });
         } catch {
             setStatus('error');
         }
